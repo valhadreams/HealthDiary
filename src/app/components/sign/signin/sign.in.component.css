@@ -1,0 +1,35 @@
+.sign-in-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.sign-in {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.sign-in-form {
+  flex-direction: column;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.sign-in-btn {
+  width: 100%;
+}
+
+.btn > * {
+  width: 49%;
+}
+
+.btn .find {
+  float: right;
+}
+
+mat-form-field {
+  display: block;
+}

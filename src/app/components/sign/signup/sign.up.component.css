@@ -1,0 +1,55 @@
+.sign-up-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.sign-up {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.sign-up-btn {
+  width: 100%;
+}
+
+.btn > * {
+  width: 49%;
+}
+
+.btn .find {
+  float: right;
+}
+
+.sex {
+  height: 65.5px;
+}
+
+.sex .sex-wrapper {
+  width: 300px;
+  position: relative;
+  top: 50%;
+  margin-top: -10px;
+}
+
+.sex mat-radio-button {
+  width: 49%;
+}
+
+.body-info > * {
+  width: 48%;
+}
+
+.body-info .weight {
+  float: right;
+}

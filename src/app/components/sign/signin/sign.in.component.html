@@ -1,0 +1,27 @@
+<div class="sign-in-container">
+  <div class="sign-in">
+
+    <div class="logo">
+      <h1>Health Diary</h1>
+    </div>
+
+    <form class="sign-in-form" [formGroup]="formModel" (ngSubmit)="submit()"  novalidate>
+      <mat-form-field>
+        <input matInput placeholder="Enter your id" formControlName="id">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Enter your password" formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+
+      <button class="sign-in-btn" mat-raised-button color="primary">Sign In</button>
+    </form>
+
+    <div class="btn">
+      <a class="sign-up" mat-raised-button color="primary" routerLink="/sign-up">Sign Up</a>
+      <a class="find" mat-raised-button color="primary" routerLink="/find-user">Find User Info</a>
+    </div>
+
+  </div>
+</div>
