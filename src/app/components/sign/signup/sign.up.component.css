@@ -21,28 +21,25 @@
 
 .sign-up-btn {
   width: 100%;
-}
-
-.btn > * {
-  width: 49%;
+  margin-top: 5px;
 }
 
 .btn .find {
   float: right;
 }
 
-.sex {
+.gender {
   height: 65.5px;
 }
 
-.sex .sex-wrapper {
+.gender .gender-wrapper {
   width: 300px;
   position: relative;
   top: 50%;
   margin-top: -10px;
 }
 
-.sex mat-radio-button {
+.gender mat-radio-button {
   width: 49%;
 }
 
@@ -52,4 +49,10 @@
 
 .body-info .weight {
   float: right;
+}
+
+.sign-in {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
 }

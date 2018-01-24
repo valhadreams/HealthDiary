@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../back/simsim/health/src/main/resources/static",
+      "outDir": "../server/build/static_resource",
       "assets": [
         "assets",
         "favicon.ico"

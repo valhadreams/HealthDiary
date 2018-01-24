@@ -4,6 +4,7 @@ import {SignInComponent} from "./sign.in.component";
 import {signInRouter} from "./sign.in.router";
 import {MaterialModule} from "../../../material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SignService} from "../../../services/sign.service";
 
 @NgModule({
   imports : [
@@ -13,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations : [SignInComponent]
+  declarations : [SignInComponent],
+  providers : [SignService]
 })
 export class SignInModule{}

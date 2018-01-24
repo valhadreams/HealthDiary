@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {SignService} from "../../../services/sign.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -10,16 +12,33 @@ export class SignInComponent implements OnInit {
   formModel : FormGroup;
   hide : boolean = true;
 
-  constructor() {
+  constructor(private signService : SignService, private router : Router) {
     this.formModel = new FormGroup({
-      id : new FormControl(),
-      password : new FormControl()
+      id : new FormControl('', Validators.required),
+      password : new FormControl('', Validators.required)
     });
   }
 
   submit(){
     const { id, password } = this.formModel.value;
     console.log(id, password);
+    this.signService.signIn(id, password)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.router.navigate(['/home']);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          console.log('sign in succeccfully');
+        }
+      );
+  }
+
+  getErrorMessage(){
+
   }
 
   ngOnInit() {
