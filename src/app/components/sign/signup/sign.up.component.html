@@ -42,13 +42,13 @@
           <input matInput formControlName="weight">
         </mat-form-field>
       </div>
-
+      <mat-error *ngIf="isDuplicateId">Duplicate user id</mat-error>
       <button class="sign-up-btn" mat-raised-button color="primary">Sign Up</button>
     </form>
 
     <div class="sign-in">
       <a class="sign-in-link" color="primary" routerLink="/sign-in">Sign In</a>
     </div>
-
+    <mat-spinner [diameter]="50" *ngIf="isShowSpinner"></mat-spinner>
   </div>
 </div>

@@ -9,14 +9,24 @@ import {HealthDiaryComponent} from "./components/home/content/health-diary/healt
 import {BodyAnalysisComponent} from "./components/home/content/body-analysis/body-analysis.component";
 import {HomeComponent} from "./components/home/home.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthGuard} from "./services/auth.guard";
+import {SignInComponent} from "./components/sign/signin/sign.in.component";
+import {SignUpComponent} from "./components/sign/signup/sign.up.component";
+import {SignService} from "./services/sign.service";
+import {AuthService} from "./services/auth.service";
+import {AuthInterceptor} from "./services/auth.interceptor";
+import {TwoButtonDialogComponent} from "./components/common/dialog/two-button-dialog/two-button-dialog.component";
 
 const components = [
   AppComponent,
   HomeComponent,
   BodyInfoComponent,
   HealthDiaryComponent,
-  BodyAnalysisComponent
+  BodyAnalysisComponent,
+  SignInComponent,
+  SignUpComponent,
+  TwoButtonDialogComponent
 ];
 
 const modules = [
@@ -30,8 +40,12 @@ const modules = [
 
 @NgModule({
   declarations: components,
+  entryComponents : [TwoButtonDialogComponent],
   imports: modules,
-  providers: [{ provide : LocationStrategy, useClass : HashLocationStrategy }],
+  providers: [
+    { provide : LocationStrategy, useClass : HashLocationStrategy },
+    { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true },
+    AuthGuard, SignService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
