@@ -22,7 +22,7 @@ export class SignUpComponent implements OnInit {
       email : new FormControl('', Validators.email),
       // sex : new FormControl('', sexFormValidator),
       gender : new FormControl(),
-      tall : new FormControl('', Validators.required),
+      height : new FormControl('', Validators.required),
       weight : new FormControl('', Validators.required)
     });
   }
@@ -34,9 +34,9 @@ export class SignUpComponent implements OnInit {
 
     this.isShowSpinner = true;
 
-    const { id, password, email, gender, tall, weight } = this.formModel.value;
+    const { id, password, email, gender, height, weight } = this.formModel.value;
     // const sex = (this.formModel.value.sex === '1' ) ? 'male' : 'female';
-    const signInfo = new SignUpObj(id, password, email, gender, tall, weight);
+    const signInfo = new SignUpObj(id, password, email, gender, height, weight);
     this.signService.signUp(signInfo)
       .subscribe(
         (res) => {

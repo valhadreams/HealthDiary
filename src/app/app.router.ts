@@ -7,6 +7,7 @@ import {HomeComponent} from "./components/home/home.component";
 import {AuthGuard} from "./services/auth.guard";
 import {SignInComponent} from "./components/sign/signin/sign.in.component";
 import {SignUpComponent} from "./components/sign/signup/sign.up.component";
+import {UserInfoComponent} from "./components/home/content/user-info/user-info.component";
 
 const routes: Routes = [
   { path : '', redirectTo : 'home', pathMatch : 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
     children : [
       { path : '', component : HealthDiaryComponent },
       { path : 'body-info', component : BodyInfoComponent },
-      { path : 'body-analysis', component : BodyAnalysisComponent }
+      { path : 'body-analysis', component : BodyAnalysisComponent },
+      { path : 'user-info', component : UserInfoComponent }
     ]
   }
 ];

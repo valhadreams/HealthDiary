@@ -21,6 +21,18 @@
         <mat-error *ngIf="formModel.hasError('required', 'email') || formModel.hasError('email', 'email')">Email is required</mat-error>
       </mat-form-field>
 
+      <div class="body-info">
+        <mat-form-field class="height">
+          <mat-placeholder>cm</mat-placeholder>
+          <input matInput formControlName="height">
+          <mat-error *ngIf="formModel.hasError('required', 'height') || formModel.hasError('required', 'weight')">Body info is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="weight">
+          <mat-placeholder>kg</mat-placeholder>
+          <input matInput formControlName="weight">
+        </mat-form-field>
+      </div>
+
       <div class="gender">
         <div class="gender-wrapper">
           <mat-radio-group formControlName="gender">
@@ -29,18 +41,6 @@
             <mat-error *ngIf="!isValidationGenderBtn">Select your gender</mat-error>
           </mat-radio-group>
         </div>
-      </div>
-
-      <div class="body-info">
-        <mat-form-field class="tall">
-          <mat-placeholder>cm</mat-placeholder>
-          <input matInput formControlName="tall">
-          <mat-error *ngIf="formModel.hasError('required', 'tall') || formModel.hasError('required', 'weight')">Body info is required</mat-error>
-        </mat-form-field>
-        <mat-form-field class="weight">
-          <mat-placeholder>kg</mat-placeholder>
-          <input matInput formControlName="weight">
-        </mat-form-field>
       </div>
       <mat-error *ngIf="isDuplicateId">Duplicate user id</mat-error>
       <button class="sign-up-btn" mat-raised-button color="primary">Sign Up</button>

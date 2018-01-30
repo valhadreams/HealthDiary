@@ -17,6 +17,7 @@ import {SignService} from "./services/sign.service";
 import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {TwoButtonDialogComponent} from "./components/common/dialog/two-button-dialog/two-button-dialog.component";
+import {UserInfoComponent} from "./components/home/content/user-info/user-info.component";
 
 const components = [
   AppComponent,
@@ -26,6 +27,7 @@ const components = [
   BodyAnalysisComponent,
   SignInComponent,
   SignUpComponent,
+  UserInfoComponent,
   TwoButtonDialogComponent
 ];
 
