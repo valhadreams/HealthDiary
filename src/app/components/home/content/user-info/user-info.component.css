@@ -1,0 +1,98 @@
+.user-info-container {
+  display: flex;
+  width: 100%;
+}
+
+.logo {
+  text-align: center;
+}
+
+.user-info {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.user-info-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.btn .find {
+  float: right;
+}
+
+.user-id, .user-pw, .user-email, .user-gender, .user-body-info {
+  width: 100%;
+}
+
+div.title {
+  width: 25%;
+  display: inline-block;
+}
+
+.input-field{
+  width: 70%;
+}
+
+.user-gender {
+  margin: 16px 0 30px;
+}
+
+.user-gender .gender-wrapper {
+  width: 70%;
+  position: relative;
+  display: inline-block;
+}
+
+.user-gender mat-radio-button {
+  width: 49%;
+}
+
+.height, .weight {
+  width: 35%;
+}
+
+.user-body-info .weight {
+  float: right;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.user-delete {
+  display: flex;
+}
+
+.btn-modify, .btn-delete {
+  width: 200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 500px) {
+  .user-info-container {
+    margin-top: 30px;
+  }
+  .user-info {
+    width: 300px;
+    margin: 0 auto;
+  }
+
+  div.title {
+    width: 25%;
+    display: block;
+  }
+
+  .input-field{
+    width: 90%;
+  }
+
+  .height, .weight {
+    width: 48%;
+  }
+
+  .gender-wrapper {
+    margin-top: 10px;
+  }
+}

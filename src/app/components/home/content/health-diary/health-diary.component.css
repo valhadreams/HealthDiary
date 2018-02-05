@@ -1,0 +1,150 @@
+.health-diary-container {
+  width:100%;
+  display: flex;
+}
+
+.calendar-container {
+  margin: 0 15px;
+  flex-grow: 1;
+  flex-basis: 0;
+
+}
+
+.calendar-indicator {
+  display: flex;
+  width: 50%;
+  height: 40px;
+  margin: 10px auto 0;
+}
+
+.current-date {
+  text-align: center;
+  flex-basis: 400px;
+  flex-shrink: 1;
+  font-size: 20pt;
+  margin-top: 7px;
+}
+
+.prev-btn {
+  float: left;
+  flex-grow: 1;
+}
+
+.next-btn {
+  float: right;
+  flex-grow: 1;
+}
+
+.calendar-header {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  height: 40px;
+}
+
+.day-of-weeks {
+  flex-grow: 2;
+  flex-basis: 0;
+  text-align: center;
+  font-size: 18pt;
+  margin-top: 7px;
+}
+
+.calendar-content {
+  margin-bottom: 20px;
+}
+
+.calendar-tile {
+  background-color: lightgrey;
+}
+
+.calendar-tile-content {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-tile-date {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 18pt;
+}
+
+.current-day {
+  font-weight: bold;
+}
+
+.grid-tile-icon {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+}
+
+.event-info-container {
+  flex-basis: 380px;
+  width: 380px;
+  display: block;
+}
+
+.event-info {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.event-info-form > mat-form-field {
+  width: 100%;
+}
+
+.event-title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.event-input {
+  width: 55%;
+}
+
+.event-min-select {
+  width: 25%;
+}
+
+.event-btns button{
+  width: fit-content;
+  margin-right: 10px;
+}
+
+.weight {
+  width: 50%;
+}
+
+.divider {
+  margin: 20px 5px;
+}
+@media (max-width: 700px) {
+  .health-diary-container {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .day-of-weeks {
+    flex-grow: 2;
+    flex-basis: 0;
+    text-align: center;
+    font-size: 13pt;
+    margin-top: 14px;
+  }
+
+  .grid-tile-date {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 10pt;
+  }
+
+  .event-info-container {
+    width: 100%;
+    display: block;
+  }
+
+}

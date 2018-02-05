@@ -1,0 +1,6 @@
+<h2 mat-dialog-title>{{ dialogTitle}}</h2>
+<mat-dialog-content>{{ dialogContent }}</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onLeftBtnClick()" mat-button mat-dialog-close>{{ leftBtnTitle }}</button>
+  <button (click)="onRightBtnClick()" mat-button mat-dialog-close>{{ rightBtnTitle }}</button>
+</mat-dialog-actions>

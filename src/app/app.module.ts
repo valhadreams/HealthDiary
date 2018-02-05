@@ -18,6 +18,8 @@ import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {TwoButtonDialogComponent} from "./components/common/dialog/two-button-dialog/two-button-dialog.component";
 import {UserInfoComponent} from "./components/home/content/user-info/user-info.component";
+import {BodyInfoAnalysisComponent} from "./components/home/content/body-analysis/body-info-analysis/body-info-analysis.component";
+import {ExerciseAnalysisComponent} from "./components/home/content/body-analysis/exercise-analysis/exercise-analysis.component";
 
 const components = [
   AppComponent,
@@ -28,6 +30,8 @@ const components = [
   SignInComponent,
   SignUpComponent,
   UserInfoComponent,
+  BodyInfoAnalysisComponent,
+  ExerciseAnalysisComponent,
   TwoButtonDialogComponent
 ];
 

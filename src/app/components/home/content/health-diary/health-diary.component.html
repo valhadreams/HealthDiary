@@ -1,0 +1,85 @@
+<div class="health-diary-container">
+  <div class="calendar-container">
+    <div class="calendar-indicator">
+      <button class="prev-btn" (click)="clickPrevBtn()" mat-icon-button>
+        <mat-icon aria-label="Example icon-button with a heart icon">keyboard_arrow_left</mat-icon>
+      </button>
+      <span class="current-date">{{ currentDate | date : 'yy MMM' }}</span>
+      <button class="next-btn" (click)="clickNextBtn()" mat-icon-button>
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+
+    <div class="calendar-header">
+      <div class="day-of-weeks" *ngFor="let day of dayOfWeeks">
+        <span>{{ day }}</span>
+      </div>
+    </div>
+
+    <div class="calendar-content">
+      <mat-grid-list cols="7" rowHeight="1:1">
+        <mat-grid-tile class="calendar-tile" *ngFor="let day of days">
+          <div *ngIf="day.date != null" class="calendar-tile-content">
+            <span class="grid-tile-date" [class.current-day]="day.isCurrentDay">{{ day.date.getDate() }}</span>
+            <button *ngIf="day.isEmptyEvent" class="grid-tile-icon" (click)="clickAddEvent(day)" mat-icon-button>
+              <mat-icon>add</mat-icon>
+            </button>
+            <button *ngIf="!day.isEmptyEvent" class="grid-tile-icon" (click)="clickEditEvent(day)" mat-icon-button>
+              <mat-icon>event</mat-icon>
+            </button>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+
+  <div class="event-info-container">
+    <div class="event-info">
+      <div class="event-title">
+        <h2>{{ currentDate | date : 'MM.dd'}} diary</h2>
+      </div>
+      <button (click)="addInputEvent()" mat-icon-button>
+        <mat-icon>add</mat-icon>
+        <span>Add event</span>
+      </button>
+      <form #form="ngForm" class="event-info-form" novalidate>
+        <div *ngFor="let event of currentEvents, let i = index" ngModelGroup="formGroup{{ i }}" class="event-info-form-group">
+          <mat-form-field class="event-input">
+            <input matInput #input="ngModel" name="what" [(ngModel)]="event.what" placeholder="Input your health event" required>
+            <mat-error *ngIf="input.invalid">Input your health event</mat-error>
+          </mat-form-field>
+          <mat-form-field class="event-min-select">
+            <mat-select #select="ngModel" name="time" [(ngModel)]="event.time" required>
+              <mat-option *ngFor="let min of minList" value="{{ min }}">{{ min }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="select.invalid">Select time</mat-error>
+            <span matSuffix>min</span>
+          </mat-form-field>
+          <button (click)="removeEvent(i)" mat-icon-button>
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+        <mat-divider class="divider"></mat-divider>
+        <div class="body-info">
+          <div class="title"><span>Changed body info</span></div>
+          <mat-form-field class="weight">
+            <mat-placeholder>Enter your weight</mat-placeholder>
+            <input matInput name="weight" value="{{currentBodyInfo.weight}}" ngModel>
+            <span matSuffix>kg</span>
+          </mat-form-field>
+        </div>
+        <div class="event-btns">
+          <button (click)="submit(form.value, form.valid)" disabled="{{!form.valid}}" mat-icon-button>
+            <mat-icon>cloud_upload</mat-icon>
+            <span>Save</span>
+          </button>
+          <button *ngIf="eventsInServer!== undefined && eventsInServer.length > 1" (click)="deleteAll()" mat-icon-button>
+            <mat-icon>delete_forever</mat-icon>
+            <span>Delete all</span>
+          </button>
+        </div>
+        <mat-error *ngIf="isSameEvent">Same with previous events</mat-error>
+      </form>
+    </div>
+  </div>
+</div>
