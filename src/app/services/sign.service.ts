@@ -25,7 +25,7 @@ export class SignService {
       'height' : signInfo.height,
       'weight' : signInfo.weight
     };
-    return this.httpClient.post('/api/auth/signup', signUpInfo);
+    return this.httpClient.post('/api/auth/user', signUpInfo);
   }
 
   signIn(id : string, password : string) : Observable<any>{

@@ -1,12 +1,12 @@
-<div class="health-diary-container">
+<div class="main-content health-diary-container">
   <div class="calendar-container">
     <div class="calendar-indicator">
-      <button class="prev-btn" (click)="clickPrevBtn()" mat-icon-button>
-        <mat-icon aria-label="Example icon-button with a heart icon">keyboard_arrow_left</mat-icon>
+      <button class="prev-btn btn btn-primary btn-simple btn-xs" (click)="clickPrevBtn()">
+        <i class="material-icons">keyboard_arrow_left</i>
       </button>
       <span class="current-date">{{ currentDate | date : 'yy MMM' }}</span>
-      <button class="next-btn" (click)="clickNextBtn()" mat-icon-button>
-        <mat-icon>keyboard_arrow_right</mat-icon>
+      <button class="next-btn btn btn-primary btn-simple btn-xs" (click)="clickNextBtn()">
+        <i class="material-icons">keyboard_arrow_right</i>
       </button>
     </div>
 
@@ -21,11 +21,11 @@
         <mat-grid-tile class="calendar-tile" *ngFor="let day of days">
           <div *ngIf="day.date != null" class="calendar-tile-content">
             <span class="grid-tile-date" [class.current-day]="day.isCurrentDay">{{ day.date.getDate() }}</span>
-            <button *ngIf="day.isEmptyEvent" class="grid-tile-icon" (click)="clickAddEvent(day)" mat-icon-button>
-              <mat-icon>add</mat-icon>
+            <button *ngIf="day.isEmptyEvent" class="grid-tile-icon btn btn-primary btn-simple btn-xs" (click)="clickAddEvent(day)">
+              <i class="material-icons">add</i>
             </button>
-            <button *ngIf="!day.isEmptyEvent" class="grid-tile-icon" (click)="clickEditEvent(day)" mat-icon-button>
-              <mat-icon>event</mat-icon>
+            <button *ngIf="!day.isEmptyEvent" class="grid-tile-icon btn btn-primary btn-simple btn-xs" (click)="clickEditEvent(day)">
+              <i class="material-icons">event</i>
             </button>
           </div>
         </mat-grid-tile>
@@ -38,8 +38,8 @@
       <div class="event-title">
         <h2>{{ currentDate | date : 'MM.dd'}} diary</h2>
       </div>
-      <button (click)="addInputEvent()" mat-icon-button>
-        <mat-icon>add</mat-icon>
+      <button class="btn btn-primary btn-simple btn-lg" (click)="addInputEvent()">
+        <i class="material-icons">add</i>
         <span>Add event</span>
       </button>
       <form #form="ngForm" class="event-info-form" novalidate>
@@ -55,8 +55,8 @@
             <mat-error *ngIf="select.invalid">Select time</mat-error>
             <span matSuffix>min</span>
           </mat-form-field>
-          <button (click)="removeEvent(i)" mat-icon-button>
-            <mat-icon>clear</mat-icon>
+          <button class="btn btn-primary btn-simple btn-xs" (click)="removeEvent(i)">
+            <i class="material-icons">clear</i>
           </button>
         </div>
         <mat-divider class="divider"></mat-divider>
@@ -69,8 +69,8 @@
           </mat-form-field>
         </div>
         <div class="event-btns">
-          <button (click)="submit(form.value, form.valid)" disabled="{{!form.valid}}" mat-icon-button>
-            <mat-icon>cloud_upload</mat-icon>
+          <button class="btn btn-primary btn-simple btn-lg" (click)="submit(form.value, form.valid)" disabled="{{!form.valid}}">
+            <i class="material-icons">cloud_upload</i>
             <span>Save</span>
           </button>
           <button *ngIf="eventsInServer!== undefined && eventsInServer.length > 1" (click)="deleteAll()" mat-icon-button>

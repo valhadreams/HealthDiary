@@ -20,10 +20,16 @@ import {TwoButtonDialogComponent} from "./components/common/dialog/two-button-di
 import {UserInfoComponent} from "./components/home/content/user-info/user-info.component";
 import {BodyInfoAnalysisComponent} from "./components/home/content/body-analysis/body-info-analysis/body-info-analysis.component";
 import {ExerciseAnalysisComponent} from "./components/home/content/body-analysis/exercise-analysis/exercise-analysis.component";
+import {SidebarComponent} from "./components/home/sidebar/sidebar.component";
+import {NavbarComponent} from "./components/home/navbar/navbar.component";
+import {FooterComponent} from "./components/home/footer/footer.component";
 
 const components = [
   AppComponent,
   HomeComponent,
+  SidebarComponent,
+  NavbarComponent,
+  FooterComponent,
   BodyInfoComponent,
   HealthDiaryComponent,
   BodyAnalysisComponent,

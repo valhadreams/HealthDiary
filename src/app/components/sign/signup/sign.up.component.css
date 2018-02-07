@@ -28,27 +28,31 @@
   float: right;
 }
 
-.gender {
-  height: 65.5px;
-}
+/*.gender {*/
+  /*height: 65.5px;*/
+/*}*/
 
-.gender .gender-wrapper {
-  width: 300px;
-  position: relative;
-  top: 50%;
-  margin-top: -10px;
-}
+/*.gender .gender-wrapper {*/
+  /*width: 300px;*/
+  /*position: relative;*/
+  /*top: 50%;*/
+  /*margin-top: -10px;*/
+/*}*/
 
-.gender mat-radio-button {
-  width: 49%;
-}
+/*.gender mat-radio-button {*/
+  /*width: 49%;*/
+/*}*/
 
-.body-info > * {
-  width: 48%;
-}
+/*.body-info > * {*/
+  /*width: 48%;*/
+/*}*/
 
-.body-info .weight {
-  float: right;
+/*.body-info .weight {*/
+  /*float: right;*/
+/*}*/
+
+.radio + .radio {
+  margin-top: 10px;
 }
 
 .sign-in {

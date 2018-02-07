@@ -1,53 +1,53 @@
-<div class="user-info-container">
-  <div class="user-info">
-    <h2>User Info</h2>
-    <form class="user-info-form" [formGroup]="formModel" autocomplete="off" novalidate>
-      <div class="user-id">
-        <div class="title"><span>ID</span></div>
-        <mat-form-field class="input-field">
-          <input matInput formControlName="id">
-        </mat-form-field>
-      </div>
-      <div class="user-pw">
-        <div class="title"><span>Password</span></div>
-        <mat-form-field class="input-field">
-          <input matInput placeholder="Enter your new password" formControlName="password" [type]="hide ? 'password' : 'text'">
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-        </mat-form-field>
-      </div>
-      <div class="user-email">
-        <div class="title"><span>Email</span></div>
-        <mat-form-field class="input-field">
-          <input matInput placeholder="Enter your email" formControlName="email">
-        </mat-form-field>
-      </div>
-      <div class="user-body-info">
-        <div class="title"><span>Body Info</span></div>
-        <mat-form-field class="height">
-          <mat-placeholder>Enter your height</mat-placeholder>
-          <input matInput formControlName="height">
-          <span matSuffix>cm</span>
-        </mat-form-field>
-        <mat-form-field class="weight">
-          <mat-placeholder>Enter your weight</mat-placeholder>
-          <span matSuffix>kg</span>
-          <input matInput formControlName="weight">
-        </mat-form-field>
-      </div>
-      <div class="user-gender">
-        <div class="title"><span>Gender</span></div>
-        <div class="gender-wrapper">
-          <mat-radio-group formControlName="gender">
-            <mat-radio-button value="Male">Male</mat-radio-button>
-            <mat-radio-button value="Female">Female</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-      <button class="btn-modify" (click)="submit()" mat-raised-button color="primary">Modify user info</button>
-    </form>
-    <div class="user-delete">
-      <button class="btn-delete" (click)="deleteUser()" mat-raised-button color="primary">Delete your account</button>
-    </div>
-    <mat-spinner [diameter]="50" *ngIf="isShowSpinner"></mat-spinner>
-  </div>
-</div>
+<!--<div class="user-info-container">-->
+  <!--<div class="user-info">-->
+    <!--<h2>User Info</h2>-->
+    <!--<form class="user-info-form" [formGroup]="formModel" autocomplete="off" novalidate>-->
+      <!--<div class="user-id">-->
+        <!--<div class="title"><span>ID</span></div>-->
+        <!--<mat-form-field class="input-field">-->
+          <!--<input matInput formControlName="id">-->
+        <!--</mat-form-field>-->
+      <!--</div>-->
+      <!--<div class="user-pw">-->
+        <!--<div class="title"><span>Password</span></div>-->
+        <!--<mat-form-field class="input-field">-->
+          <!--<input matInput placeholder="Enter your new password" formControlName="password" [type]="hide ? 'password' : 'text'">-->
+          <!--<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>-->
+        <!--</mat-form-field>-->
+      <!--</div>-->
+      <!--<div class="user-email">-->
+        <!--<div class="title"><span>Email</span></div>-->
+        <!--<mat-form-field class="input-field">-->
+          <!--<input matInput placeholder="Enter your email" formControlName="email">-->
+        <!--</mat-form-field>-->
+      <!--</div>-->
+      <!--<div class="user-body-info">-->
+        <!--<div class="title"><span>Body Info</span></div>-->
+        <!--<mat-form-field class="height">-->
+          <!--<mat-placeholder>Enter your height</mat-placeholder>-->
+          <!--<input matInput formControlName="height">-->
+          <!--<span matSuffix>cm</span>-->
+        <!--</mat-form-field>-->
+        <!--<mat-form-field class="weight">-->
+          <!--<mat-placeholder>Enter your weight</mat-placeholder>-->
+          <!--<span matSuffix>kg</span>-->
+          <!--<input matInput formControlName="weight">-->
+        <!--</mat-form-field>-->
+      <!--</div>-->
+      <!--<div class="user-gender">-->
+        <!--<div class="title"><span>Gender</span></div>-->
+        <!--<div class="gender-wrapper">-->
+          <!--<mat-radio-group formControlName="gender">-->
+            <!--<mat-radio-button value="Male">Male</mat-radio-button>-->
+            <!--<mat-radio-button value="Female">Female</mat-radio-button>-->
+          <!--</mat-radio-group>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<button class="btn-modify" (click)="submit()" mat-raised-button color="primary">Modify user info</button>-->
+    <!--</form>-->
+    <!--<div class="user-delete">-->
+      <!--<button class="btn-delete" (click)="deleteUser()" mat-raised-button color="primary">Delete your account</button>-->
+    <!--</div>-->
+    <!--<mat-spinner [diameter]="50" *ngIf="isShowSpinner"></mat-spinner>-->
+  <!--</div>-->
+<!--</div>-->

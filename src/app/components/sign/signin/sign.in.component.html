@@ -6,24 +6,25 @@
     </div>
 
     <form class="sign-in-form" [formGroup]="formModel" (ngSubmit)="submit()"  novalidate>
-      <mat-form-field>
-        <input matInput placeholder="Enter your id *" formControlName="id">
-        <mat-error *ngIf="formModel.hasError('required', 'id')">Id is required</mat-error>
-      </mat-form-field>
+      <div class="col-sm-12">
+        <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'id')}">
+          <label class="control-label">Enter your id</label>
+          <input type="text" class="form-control" formControlName="id"/>
+        </div>
+      </div>
 
-      <mat-form-field>
-        <input matInput placeholder="Enter your password *" formControlName="password" [type]="hide ? 'password' : 'text'">
-        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-        <mat-error *ngIf="formModel.hasError('required', 'password')">Password is required</mat-error>
-      </mat-form-field>
-      <mat-error *ngIf="!isValidUserInfo">Invalid user info</mat-error>
-      <button class="sign-in-btn" mat-raised-button color="primary">Sign In</button>
+      <div class="col-sm-12">
+        <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'password')}">
+          <label class="control-label">Enter your password</label>
+          <input type="password" class="form-control" formControlName="password"/>
+        </div>
+      </div>
+
+      <button class="sign-in-btn btn btn-primary">Sign In</button>
     </form>
 
     <div class="sign-up">
       <a class="sign-up-link" color="primary" routerLink="/sign-up">Sign Up</a>
-      <!--<a class="find" mat-raised-button color="primary" routerLink="/find-user">Find User Info</a>-->
     </div>
-    <mat-spinner [diameter]="50" *ngIf="isShowSpinner"></mat-spinner>
   </div>
 </div>
