@@ -28,6 +28,10 @@
   float: right;
 }
 
+.error-msg {
+  color: #a94442;
+}
+
 /*.gender {*/
   /*height: 65.5px;*/
 /*}*/

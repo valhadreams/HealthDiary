@@ -1,6 +1,7 @@
 .health-diary-container {
   width:100%;
   display: flex;
+  flex-direction: column;
 }
 
 .calendar-container {
@@ -46,8 +47,8 @@
   flex-grow: 2;
   flex-basis: 0;
   text-align: center;
-  font-size: 18pt;
-  margin-top: 7px;
+  font-size: 13pt;
+  margin-top: 14px;
 }
 
 .calendar-content {
@@ -67,7 +68,7 @@
   position: absolute;
   top: 5%;
   right: 5%;
-  font-size: 18pt;
+  font-size: 10pt;
 }
 
 .current-day {
@@ -81,8 +82,7 @@
 }
 
 .event-info-container {
-  flex-basis: 380px;
-  width: 380px;
+  width: 100%;
   display: block;
 }
 
@@ -91,8 +91,8 @@
   margin: 0 auto;
 }
 
-.event-info-form > mat-form-field {
-  width: 100%;
+.event-info-table {
+  width:100%;
 }
 
 .event-title {
@@ -120,31 +120,11 @@
 .divider {
   margin: 20px 5px;
 }
-@media (max-width: 700px) {
-  .health-diary-container {
-    width:100%;
-    display: flex;
-    flex-direction: column;
-  }
 
-  .day-of-weeks {
-    flex-grow: 2;
-    flex-basis: 0;
-    text-align: center;
-    font-size: 13pt;
-    margin-top: 14px;
-  }
+select.form-control {
+  -webkit-appearance: menulist;
+}
 
-  .grid-tile-date {
-    position: absolute;
-    top: 5%;
-    right: 5%;
-    font-size: 10pt;
-  }
-
-  .event-info-container {
-    width: 100%;
-    display: block;
-  }
-
+.error-msg {
+  color: #a94442;
 }

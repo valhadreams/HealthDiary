@@ -9,34 +9,34 @@ import {Router} from "@angular/router";
   styleUrls: ['./sign.up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  formModel: FormGroup;
-  hide = true;
-  isValidationGenderBtn = true;
-  isDuplicateId = false;
-  isShowSpinner = false;
+  signUpformGroup: FormGroup;
+  isInvalidForm = false;
+  errorMessage : string;
 
   constructor(private signService : SignService, private router : Router) {
-    this.formModel = new FormGroup({
-      id : new FormControl(),
-      password : new FormControl('', Validators.required),
+    this.signUpformGroup = new FormGroup({
       email : new FormControl('', Validators.email),
-      // sex : new FormControl('', sexFormValidator),
-      gender : new FormControl(''),
+      nickname : new FormControl('', Validators.required),
+      password : new FormControl('', Validators.required),
+      gender : new FormControl('', Validators.required),
       height : new FormControl('', Validators.required),
       weight : new FormControl('', Validators.required)
     });
   }
 
   submit(){
-    this.isValidationGenderBtn = this.checkValidationGenderBtn();
-    if(!this.formModel.valid || !this.isValidationGenderBtn)
+    if(!this.signUpformGroup.valid) {
+      Object.keys(this.signUpformGroup.controls).forEach(field => {
+        const control = this.signUpformGroup.get(field);
+        control.markAsDirty({ onlySelf : true });
+      });
+      this.isInvalidForm = true;
+      this.errorMessage = 'Invalid user data';
       return;
+    }
 
-    this.isShowSpinner = true;
-
-    const { id, password, email, gender, height, weight } = this.formModel.value;
-    // const sex = (this.formModel.value.sex === '1' ) ? 'male' : 'female';
-    const signInfo = new SignUpObj(id, password, email, gender, height, weight);
+    const { email, nickname, password, gender, height, weight } = this.signUpformGroup.value;
+    const signInfo = new SignUpObj(email, nickname, password, gender, height, weight);
     this.signService.signUp(signInfo)
       .subscribe(
         (res) => {
@@ -44,10 +44,13 @@ export class SignUpComponent implements OnInit {
             this.router.navigate(['/sign-in']);
         },
         error => {
-          if(error.status === 409) // duplicate id
-            this.isDuplicateId = true;
+          this.isInvalidForm = true;
+          if(error.status === 409){ // duplicate id
+            this.errorMessage = 'Duplicate user email';
+          } else if(error.status === 404){
+            this.errorMessage = 'Server error';
+          }
           console.log('post error : ', error);
-          this.isShowSpinner = false;
         },
         () => {
           console.log('post complete');
@@ -55,9 +58,14 @@ export class SignUpComponent implements OnInit {
       );
   }
 
-  checkValidationGenderBtn() : boolean{
-    const { gender } = this.formModel.value;
-    return gender !== null && gender !== '';
+  isFieldValid(field: string) {
+    return !this.signUpformGroup.get(field).valid && this.signUpformGroup.get(field).dirty;
+  }
+
+  displayFieldCss(field: string) {
+    return {
+      'has-error': this.isFieldValid(field)
+    };
   }
 
   ngOnInit() {

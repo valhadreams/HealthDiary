@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CalendarService, Day} from "../../../../services/calendar.service";
 import {MatDialog} from "@angular/material";
-import {TwoButtonDialogComponent} from "../../../common/dialog/two-button-dialog/two-button-dialog.component";
 
 @Component({
   selector: 'app-health-diary',
@@ -21,6 +20,8 @@ export class HealthDiaryComponent implements OnInit{
   eventList : Array<Day>;
   minList : Array<number> = new Array();
   isSameEvent = false;
+  isInvalidForm = false;
+  errorMessage : string;
 
   constructor(private calendarService : CalendarService, private dialog: MatDialog){
     for(let min=5; min<=180; min=min+5){
@@ -140,26 +141,15 @@ export class HealthDiaryComponent implements OnInit{
   }
 
   removeEvent(i: number){
-    let dialog = this.dialog.open(TwoButtonDialogComponent, {
-      width: '250px',
-      data: {
-        title: 'Alert',
-        content: 'Ary really remove event?</br>You must click save button. So this Modification will save.',
-        leftBtnTitle: 'No',
-        rightBtnTitle: 'Ok'
-      }
-    });
-    dialog.afterClosed().subscribe(result => {
-      if(result === 'Ok'){
-        this.currentEvents.splice(i, 1);
-      }
-    })
+    this.currentEvents.splice(i, 1);
   }
 
   submit(value, isValid){
-    if(!isValid)
+    if(!isValid) {
+      this.isInvalidForm = true;
+      this.errorMessage = 'Enter your exercise info';
       return;
-
+    }
     const bodyInfo = {
       weight: value.weight
     };
@@ -178,9 +168,12 @@ export class HealthDiaryComponent implements OnInit{
             (res) => {
               console.log(res);
               this.refreshData(this.currentDate);
+              this.isInvalidForm = false;
             },
             (err) => {
               console.log(err);
+              this.isInvalidForm = true;
+              this.errorMessage = 'Server error';
             },
             () => {
               console.log('send event complete');

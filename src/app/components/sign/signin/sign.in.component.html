@@ -5,22 +5,28 @@
       <h1>Health Diary</h1>
     </div>
 
-    <form class="sign-in-form" [formGroup]="formModel" (ngSubmit)="submit()"  novalidate>
+    <form class="sign-in-form" [formGroup]="signInFormGroup" novalidate>
       <div class="col-sm-12">
-        <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'id')}">
-          <label class="control-label">Enter your id</label>
-          <input type="text" class="form-control" formControlName="id"/>
+        <div class="form-group label-floating"
+             [ngClass]="displayFieldCss('email')">
+          <label class="control-label">Enter your email</label>
+          <input type="email" class="form-control" formControlName="email"/>
         </div>
       </div>
 
       <div class="col-sm-12">
-        <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'password')}">
+        <div class="form-group label-floating"
+             [ngClass]="displayFieldCss('password')">
           <label class="control-label">Enter your password</label>
           <input type="password" class="form-control" formControlName="password"/>
         </div>
       </div>
 
-      <button class="sign-in-btn btn btn-primary">Sign In</button>
+      <div *ngIf="isInvalidForm" class="error-msg">
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <button class="sign-in-btn btn btn-primary" (click)="submit()">Sign In</button>
     </form>
 
     <div class="sign-up">

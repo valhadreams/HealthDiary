@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 
 export class SignUpObj {
-  constructor(public id : string,
+  constructor(public nickname : string,
               public password : string,
               public email : string,
               public gender : string,
@@ -16,9 +16,9 @@ export class SignService {
 
   constructor(private httpClient : HttpClient) { }
 
-  signUp(signInfo : SignUpObj) : Observable<any>{
+  signUp(signInfo: SignUpObj): Observable<any>{
     const signUpInfo = {
-      'id' : signInfo.id,
+      'nickname' : signInfo.nickname,
       'password' : signInfo.password,
       'email' : signInfo.email,
       'gender' : signInfo.gender,
@@ -28,9 +28,9 @@ export class SignService {
     return this.httpClient.post('/api/auth/user', signUpInfo);
   }
 
-  signIn(id : string, password : string) : Observable<any>{
+  signIn(id: string, password: string): Observable<any>{
     const signInInfo = {
-      'id' : id,
+      'email' : id,
       'password' : password
     };
     return this.httpClient.post('/api/auth/login', signInInfo);

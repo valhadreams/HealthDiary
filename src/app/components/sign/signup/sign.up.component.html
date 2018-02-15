@@ -5,60 +5,72 @@
       <h1>Health Diary</h1>
     </div>
 
-    <form class="sign-up-form" (ngSubmit)="submit()" [formGroup]="formModel" novalidate>
-      <div class="col-sm-12">
-        <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'id')}">
-          <label class="control-label">Enter your id</label>
-          <input type="text" class="form-control" formControlName="id"/>
-        </div>
-      </div>
+    <form class="sign-up-form" [formGroup]="signUpformGroup" novalidate>
+      <fieldset>
 
-      <div class="col-sm-12">
-        <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'password')}">
-          <label class="control-label">Enter your password</label>
-          <input type="password" class="form-control" formControlName="password"/>
-        </div>
-      </div>
-
-      <div class="col-sm-12">
-        <div class="form-group label-floating" [ngClass]="{'has-error' : (formModel.hasError('required', 'email') || formModel.hasError('email', 'email'))}">
-          <label class="control-label">Enter your email</label>
-          <input type="email" class="form-control" formControlName="email"/>
-        </div>
-      </div>
-
-      <div class="body-info">
-        <div class="col-sm-6">
-          <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'height')}">
-            <label class="control-label">Enter your height</label>
-            <input type="password" class="form-control" formControlName="height"/>
+        <div class="col-sm-12">
+          <div class="form-group label-floating"
+               [ngClass]="displayFieldCss('email')">
+            <label class="control-label">Enter your email</label>
+            <input type="email" class="form-control" formControlName="email"/>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="form-group label-floating" [ngClass]="{'has-error' : formModel.hasError('required', 'weight')}">
-            <label class="control-label">Enter your weight</label>
-            <input type="password" class="form-control" formControlName="weight"/>
+
+        <div class="col-sm-12">
+          <div class="form-group label-floating"
+               [ngClass]="displayFieldCss('nickname')">
+            <label class="control-label">Enter your nickname</label>
+            <input type="text" class="form-control" formControlName="nickname" required/>
           </div>
         </div>
-      </div>
 
-      <div>
-        <div class="radio col-sm-6">
-          <label>
-            <input type="radio" value="Female" formControlName="gender">
-            Female
-          </label>
+        <div class="col-sm-12">
+          <div class="form-group label-floating"
+               [ngClass]="displayFieldCss('password')">
+            <label class="control-label">Enter your password</label>
+            <input type="password" class="form-control" formControlName="password"/>
+          </div>
         </div>
-        <div class="radio col-sm-6">
-          <label>
-            <input type="radio" value="Male" formControlName="gender">
-            Male
-          </label>
-        </div>
-      </div>
 
-      <mat-error *ngIf="isDuplicateId">Duplicate user id</mat-error>
-      <button class="sign-up-btn btn btn-primary">Sign Up</button>
+        <div class="body-info">
+          <div class="col-sm-6">
+            <div class="form-group label-floating"
+                 [ngClass]="displayFieldCss('height')">
+              <label class="control-label">Enter your height</label>
+              <input type="number" class="form-control" formControlName="height"/>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group label-floating"
+                 [ngClass]="displayFieldCss('weight')">
+              <label class="control-label">Enter your weight</label>
+              <input type="number" class="form-control" formControlName="weight"/>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="radio col-sm-6"
+               [ngClass]="displayFieldCss('gender')">
+            <label>
+              <input type="radio" value="G" formControlName="gender">
+              Female
+            </label>
+          </div>
+          <div class="radio col-sm-6"
+               [ngClass]="displayFieldCss('gender')">
+            <label>
+              <input type="radio" value="B" formControlName="gender">
+              Male
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <div *ngIf="isInvalidForm" class="error-msg">
+        <span>{{ errorMessage }}</span>
+      </div>
+      <button class="sign-up-btn btn btn-primary" (click)="submit()">Sign Up</button>
     </form>
 
     <div class="sign-in">

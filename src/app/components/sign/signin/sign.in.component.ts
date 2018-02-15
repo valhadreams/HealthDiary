@@ -10,40 +10,48 @@ import {MatSpinner} from "@angular/material";
   styleUrls: ['./sign.in.component.css']
 })
 export class SignInComponent implements OnInit {
-  formModel : FormGroup;
-  hide : boolean = true;
-  isValidUserInfo = true;
-  isShowSpinner = false;
+  signInFormGroup : FormGroup;
+  isInvalidForm = false;
+  errorMessage : string;
 
   @ViewChild('spinner') spinner : MatSpinner;
 
-
   constructor(private signService : SignService, private router : Router) {
-    this.formModel = new FormGroup({
-      id : new FormControl('', Validators.required),
+    this.signInFormGroup = new FormGroup({
+      email : new FormControl('', Validators.email),
       password : new FormControl('', Validators.required)
     });
 
   }
 
   submit(){
-    if(!this.formModel.valid) return;
-    this.isShowSpinner = true;
-    const { id, password } = this.formModel.value;
+    if(!this.signInFormGroup.valid){
+      Object.keys(this.signInFormGroup.controls).forEach(field => {
+        const control = this.signInFormGroup.get(field);
+        control.markAsDirty({ onlySelf : true });
+      });
+      this.isInvalidForm = true;
+      this.errorMessage = 'Invalid user data';
+      return;
+    }
+    const { id, password } = this.signInFormGroup.value;
     console.log(id, password);
     this.signService.signIn(id, password)
       .subscribe(
         (res) => {
-          this.isShowSpinner = false;
           if(res.result) {
             localStorage.setItem('token', res.token);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/diary']);
           }
         },
         (error) => {
-          this.isShowSpinner = false;
           console.log(error);
-          this.isValidUserInfo = false;
+          this.isInvalidForm = true;
+          if(error.status === 404){
+            this.errorMessage = 'Server error';
+          } else {
+            this.errorMessage = 'Invalid user data';
+          }
         },
         () => {
           console.log('sign in succeccfully');
@@ -51,8 +59,14 @@ export class SignInComponent implements OnInit {
       );
   }
 
-  getErrorMessage(){
+  isFieldValid(field: string) {
+    return !this.signInFormGroup.get(field).valid && this.signInFormGroup.get(field).dirty;
+  }
 
+  displayFieldCss(field: string) {
+    return {
+      'has-error': this.isFieldValid(field)
+    };
   }
 
   ngOnInit() {

@@ -12,16 +12,18 @@ import {BodyInfoAnalysisComponent} from "./components/home/content/body-analysis
 import {ExerciseAnalysisComponent} from "./components/home/content/body-analysis/exercise-analysis/exercise-analysis.component";
 
 const routes: Routes = [
-  { path : '', redirectTo : 'home', pathMatch : 'full' },
+  { path : '', redirectTo : 'home/diary', pathMatch : 'full' },
   { path : 'sign-in', component : SignInComponent, canActivate: [AuthGuard] },
   { path : 'sign-up', component : SignUpComponent, canActivate: [AuthGuard] },
   {
     path : 'home', component : HomeComponent, canActivate: [AuthGuard],
     children : [
-      { path : '', component : HealthDiaryComponent },
+      { path : '', redirectTo : 'diary', pathMatch : 'full' },
+      { path : 'diary', component : HealthDiaryComponent },
       { path : 'body-info', component : BodyInfoComponent },
       { path : 'body-analysis', component : BodyAnalysisComponent,
         children : [
+          { path : '', redirectTo : 'body-info', pathMatch : 'full' },
           { path : 'body-info', component : BodyInfoAnalysisComponent },
           { path : 'exercise', component : ExerciseAnalysisComponent }
         ]},

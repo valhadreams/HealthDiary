@@ -10,14 +10,17 @@ import {SignService, SignUpObj} from "../../../../services/sign.service";
 })
 export class UserInfoComponent implements OnInit {
   formModel: FormGroup;
-  hide = true;
-  isShowSpinner = false;
+  nickname: string;
+  email: string;
+  gender: string;
+  height: number;
+  weight: number;
 
-  constructor(private signService : SignService, private router : Router) {
+  constructor(private signService : SignService) {
     this.formModel = new FormGroup({
-      id : new FormControl({ value: '', disabled: true }),
-      password : new FormControl('', Validators.required),
       email : new FormControl('', Validators.email),
+      nickname : new FormControl('', Validators.required),
+      password : new FormControl('', Validators.required),
       gender : new FormControl(),
       height : new FormControl('', Validators.required),
       weight : new FormControl('', Validators.required)
@@ -28,20 +31,20 @@ export class UserInfoComponent implements OnInit {
         (res) => {
           console.log(res);
           if(res){
-            this.formModel.setValue({
-              id: res.userId,
-              password: '',
-              email: res.email,
-              gender: res.gender,
-              height: res.height,
-              weight: res.weight
-            });
-            this.formModel.patchValue({gender: res.gender});
-
+            this.nickname = res.nickname;
+            this.email = res.email;
+            this.gender = res.gender;
+            this.height = res.height;
+            this.weight = res.weight;
           }
         },
         (err) => {
           console.log(err);
+          this.nickname = 'nickname';
+          this.email = 'email';
+          this.gender = 'Female';
+          this.height = 222;
+          this.weight = 222;
         },
         () => {
 
@@ -52,21 +55,17 @@ export class UserInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(){
-    this.isShowSpinner = true;
-
+  submit(formValue : any){
     const userInfo = this.formModel.value;
 
     this.signService.updateUserInfo(userInfo)
       .subscribe(
         (res) => {
-          this.isShowSpinner = false;
           if(res.result === 'ok')
             console.log('update successfully');
         },
         error => {
           console.log('error : ', error);
-          this.isShowSpinner = false;
         },
         () => {
           console.log('post complete');
@@ -89,10 +88,5 @@ export class UserInfoComponent implements OnInit {
 
         }
       )
-  }
-
-  checkValidationGenderBtn() : boolean{
-    const { gender } = this.formModel.value;
-    return gender !== null && gender !== '';
   }
 }

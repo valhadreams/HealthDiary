@@ -43,40 +43,43 @@
         <span>Add event</span>
       </button>
       <form #form="ngForm" class="event-info-form" novalidate>
-        <div *ngFor="let event of currentEvents, let i = index" ngModelGroup="formGroup{{ i }}" class="event-info-form-group">
-          <mat-form-field class="event-input">
-            <input matInput #input="ngModel" name="what" [(ngModel)]="event.what" placeholder="Input your health event" required>
-            <mat-error *ngIf="input.invalid">Input your health event</mat-error>
-          </mat-form-field>
-          <mat-form-field class="event-min-select">
-            <mat-select #select="ngModel" name="time" [(ngModel)]="event.time" required>
-              <mat-option *ngFor="let min of minList" value="{{ min }}">{{ min }}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="select.invalid">Select time</mat-error>
-            <span matSuffix>min</span>
-          </mat-form-field>
-          <button class="btn btn-primary btn-simple btn-xs" (click)="removeEvent(i)">
-            <i class="material-icons">clear</i>
-          </button>
-        </div>
-        <mat-divider class="divider"></mat-divider>
-        <div class="body-info">
-          <div class="title"><span>Changed body info</span></div>
-          <mat-form-field class="weight">
-            <mat-placeholder>Enter your weight</mat-placeholder>
-            <input matInput name="weight" value="{{currentBodyInfo.weight}}" ngModel>
-            <span matSuffix>kg</span>
-          </mat-form-field>
+        <table class="event-info-table">
+          <tbody>
+            <tr *ngFor="let event of currentEvents, let i = index" ngModelGroup="formGroup{{ i }}" class="event-info-form-group">
+              <td class="col-sm-6">
+                <div class="form-group label-floating">
+                  <label class="control-label">Enter your event</label>
+                  <input type="text" class="form-control" name="what" [(ngModel)]="event.what" #what="ngModel" required/>
+                </div>
+              </td>
+              <td class="col-sm-4">
+                <div class="form-group">
+                  <select class="form-control" name="time" [(ngModel)]="event.time" #time="ngModel" required>
+                    <option hidden>Minute</option>
+                    <option *ngFor="let min of minList" value="{{ min }}">{{ min }}</option>
+                  </select>
+                </div>
+              </td>
+              <td class="col-sm-2">
+                <button *ngIf="currentEvents.length > 1" class="btn btn-primary btn-simple" (click)="removeEvent(i)">
+                  <i class="material-icons">clear</i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="isInvalidForm" class="error-msg">
+          <span>{{ errorMessage }}</span>
         </div>
         <div class="event-btns">
-          <button class="btn btn-primary btn-simple btn-lg" (click)="submit(form.value, form.valid)" disabled="{{!form.valid}}">
+          <button class="btn btn-primary btn-simple btn-lg" (click)="submit(form.value, form.valid)">
             <i class="material-icons">cloud_upload</i>
             <span>Save</span>
           </button>
-          <button *ngIf="eventsInServer!== undefined && eventsInServer.length > 1" (click)="deleteAll()" mat-icon-button>
-            <mat-icon>delete_forever</mat-icon>
-            <span>Delete all</span>
-          </button>
+          <!--<button class="btn btn-primary btn-simple btn-lg" *ngIf="eventsInServer !== undefined && eventsInServer.length > 1" (click)="deleteAll()">-->
+            <!--<i class="material-icons">delete_forever</i>-->
+            <!--<span>Delete all</span>-->
+          <!--</button>-->
         </div>
         <mat-error *ngIf="isSameEvent">Same with previous events</mat-error>
       </form>

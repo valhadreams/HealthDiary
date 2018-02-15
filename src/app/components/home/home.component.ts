@@ -16,6 +16,7 @@ export class HomeComponent implements OnDestroy {
   ];
 
   constructor(private signService: SignService) {
+
   }
 
   logout(){
