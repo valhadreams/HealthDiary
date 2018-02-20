@@ -61,27 +61,22 @@
                 </div>
               </td>
               <td class="col-sm-2">
-                <button *ngIf="currentEvents.length > 1" class="btn btn-primary btn-simple" (click)="removeEvent(i)">
+                <button class="btn btn-primary btn-simple" (click)="removeEvent(i)">
                   <i class="material-icons">clear</i>
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
-        <div *ngIf="isInvalidForm" class="error-msg">
+        <div *ngIf="isInvalidForm || currentEvents.length < 1" class="error-msg">
           <span>{{ errorMessage }}</span>
         </div>
         <div class="event-btns">
-          <button class="btn btn-primary btn-simple btn-lg" (click)="submit(form.value, form.valid)">
+          <button class="btn btn-primary btn-simple btn-lg" (click)="submit(form.value, form.valid)"  [disabled]="isEmptyEventDay && currentEvents.length < 1">
             <i class="material-icons">cloud_upload</i>
             <span>Save</span>
           </button>
-          <!--<button class="btn btn-primary btn-simple btn-lg" *ngIf="eventsInServer !== undefined && eventsInServer.length > 1" (click)="deleteAll()">-->
-            <!--<i class="material-icons">delete_forever</i>-->
-            <!--<span>Delete all</span>-->
-          <!--</button>-->
         </div>
-        <mat-error *ngIf="isSameEvent">Same with previous events</mat-error>
       </form>
     </div>
   </div>

@@ -25,6 +25,7 @@ export class SignUpComponent implements OnInit {
   }
 
   submit(){
+    this.isInvalidForm = false;
     if(!this.signUpformGroup.valid) {
       Object.keys(this.signUpformGroup.controls).forEach(field => {
         const control = this.signUpformGroup.get(field);

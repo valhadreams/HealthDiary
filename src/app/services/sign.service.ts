@@ -17,33 +17,33 @@ export class SignService {
   constructor(private httpClient : HttpClient) { }
 
   signUp(signInfo: SignUpObj): Observable<any>{
-    // const signUpInfo = {
-    //   'nickname' : signInfo.nickname,
-    //   'password' : signInfo.password,
-    //   'email' : signInfo.email,
-    //   'gender' : signInfo.gender,
-    //   'height' : signInfo.height,
-    //   'weight' : signInfo.weight
-    // };
-    const signUpInfo = new HttpParams()
-      .set('email', signInfo.email)
-      .set('password', signInfo.password)
-      .set('nickname', signInfo.nickname)
-      .set('gender', signInfo.gender)
-      .set('height', signInfo.height.toString())
-      .set('weight', signInfo.weight.toString());
-    return this.httpClient.post('/api/auth/user', signUpInfo.toString());
+    const signUpInfo = {
+      'nickname' : signInfo.nickname,
+      'password' : signInfo.password,
+      'email' : signInfo.email,
+      'gender' : signInfo.gender,
+      'height' : signInfo.height,
+      'weight' : signInfo.weight
+    };
+    // const signUpInfo = new HttpParams()
+    //   .set('email', signInfo.email)
+    //   .set('password', signInfo.password)
+    //   .set('nickname', signInfo.nickname)
+    //   .set('gender', signInfo.gender)
+    //   .set('height', signInfo.height.toString())
+    //   .set('weight', signInfo.weight.toString());
+    return this.httpClient.post('/api/auth/user', signUpInfo);
   }
 
   signIn(email: string, password: string): Observable<any>{
-    // const signInInfo = {
-    //   'email' : email,
-    //   'password' : password
-    // };
-    const signInInfo = new HttpParams()
-      .set('email', email)
-      .set('password', password);
-    return this.httpClient.post('/api/auth/login', signInInfo.toString());
+    const signInInfo = {
+      'email' : email,
+      'password' : password
+    };
+    // const signInInfo = new HttpParams()
+    //   .set('email', email)
+    //   .set('password', password);
+    return this.httpClient.post('/api/auth/login', signInInfo);
   }
 
   signOut(){

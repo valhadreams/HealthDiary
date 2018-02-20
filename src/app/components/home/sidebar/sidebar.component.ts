@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SignService} from "../../../services/sign.service";
 
 declare const $: any;
 declare interface RouteInfo {
@@ -22,15 +23,20 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() { }
+  constructor(private signService: SignService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
+
   isMobileMenu() {
       if ($(window).width() > 991) {
           return false;
       }
       return true;
-  };
+  }
+
+  logout(){
+    this.signService.signOut();
+  }
 }

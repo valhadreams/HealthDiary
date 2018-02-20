@@ -10,7 +10,7 @@ import {MatDialog} from "@angular/material";
 })
 export class HealthDiaryComponent implements OnInit{
   currentDate : Date;
-  currentEvents : any[];
+  currentEvents = [];
   currentBodyInfo = {
     weight: ''
   };
@@ -22,6 +22,7 @@ export class HealthDiaryComponent implements OnInit{
   isSameEvent = false;
   isInvalidForm = false;
   errorMessage : string;
+  isEmptyEventDay: boolean;
 
   constructor(private calendarService : CalendarService, private dialog: MatDialog){
     for(let min=5; min<=180; min=min+5){
@@ -84,7 +85,7 @@ export class HealthDiaryComponent implements OnInit{
         bodyInfo = eventObj.bodyInfo;
         isEmptyEvent = false;
       } else {
-        events = [{what : '', time : ''}];
+        events = [];
       }
 
       let isCurrentDay = false;
@@ -93,6 +94,10 @@ export class HealthDiaryComponent implements OnInit{
         this.eventsInServer = events;
         this.currentEvents = JSON.parse(JSON.stringify(events));
         this.currentBodyInfo = bodyInfo;
+        this.isEmptyEventDay = isEmptyEvent;
+        if(this.currentEvents.length < 1){
+          this.errorMessage = 'Click add event button';
+        }
       }
       const dayObj = new Day(
         tempDate,
@@ -132,16 +137,22 @@ export class HealthDiaryComponent implements OnInit{
   }
 
   addInputEvent(){
-    const lastEvent = this.currentEvents[this.currentEvents.length - 1];
-    if(lastEvent.event === '' || lastEvent.min === '') {
-      console.log('Input event info');
-      return;
+    if(this.currentEvents.length > 0){
+      const lastEvent = this.currentEvents[this.currentEvents.length - 1];
+      if(lastEvent.event === '' || lastEvent.min === '') {
+        console.log('Input event info');
+        return;
+      }
     }
+
     this.currentEvents.push({ what : '', time : ''});
   }
 
   removeEvent(i: number){
     this.currentEvents.splice(i, 1);
+    if(this.currentEvents.length < 1){
+      this.errorMessage = 'Click add event button';
+    }
   }
 
   submit(value, isValid){
@@ -160,9 +171,10 @@ export class HealthDiaryComponent implements OnInit{
     if(events.length === 0){
       console.log('Empty event');
     } else if(JSON.stringify(events) === JSON.stringify(this.eventsInServer)){
-      this.isSameEvent = true;
+      this.isInvalidForm = true;
+      this.errorMessage = 'Same with previous events';
     } else {
-      if(this.eventsInServer[0].what === '' && this.eventsInServer[0].time === ''){
+      if(this.isEmptyEventDay){
         this.calendarService.addEventOfDay(this.currentDate, events, bodyInfo)
           .subscribe(
             (res) => {
@@ -195,20 +207,5 @@ export class HealthDiaryComponent implements OnInit{
           );
       }
     }
-  }
-
-  deleteAll(){
-    this.calendarService.updateEventOfDay(this.currentDate, null, null)
-      .subscribe((res) => {
-          console.log(res);
-          this.refreshData(this.currentDate);
-        },
-        (err) => {
-          console.log(err);
-        },
-        () => {
-          console.log('delete all event complete');
-        }
-      );
   }
 }

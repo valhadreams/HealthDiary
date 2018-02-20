@@ -42,6 +42,10 @@ export class CalendarService {
         "event" : events
       }
     };
+    // const data = new HttpParams()
+    //   .set('date', date.toString())
+    //   .set('bodyInfo', JSON.stringify(bodyInfo))
+    //   .set('event', JSON.stringify(events));
     return this.http.post('/api/auth/events', data);
   }
 

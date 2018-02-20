@@ -15,12 +15,8 @@ export class HomeComponent implements OnDestroy {
     { title : "User Info" , link : "./user-info" }
   ];
 
-  constructor(private signService: SignService) {
+  constructor() {
 
-  }
-
-  logout(){
-    this.signService.signOut();
   }
 
   ngOnDestroy(): void {
