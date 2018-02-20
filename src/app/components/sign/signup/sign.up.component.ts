@@ -36,11 +36,11 @@ export class SignUpComponent implements OnInit {
     }
 
     const { email, nickname, password, gender, height, weight } = this.signUpformGroup.value;
-    const signInfo = new SignUpObj(email, nickname, password, gender, height, weight);
+    const signInfo = new SignUpObj(email, password, nickname, gender, height, weight);
     this.signService.signUp(signInfo)
       .subscribe(
         (res) => {
-          if(res.result)
+          if(res.statusCode === 200)
             this.router.navigate(['/sign-in']);
         },
         error => {

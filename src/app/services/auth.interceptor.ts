@@ -10,7 +10,8 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
     const requestClone = request.clone({
       setHeaders: {
-        Authorization : `Bearer ${ this.authService.getToken() }`
+        'Authorization' : `Bearer ${ this.authService.getToken() }`,
+        'Content-Type' : 'application/x-www-form-urlencoded'
       }
     });
 

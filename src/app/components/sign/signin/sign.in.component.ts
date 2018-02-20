@@ -34,14 +34,13 @@ export class SignInComponent implements OnInit {
       this.errorMessage = 'Invalid user data';
       return;
     }
-    const { id, password } = this.signInFormGroup.value;
-    console.log(id, password);
-    this.signService.signIn(id, password)
+    const { email, password } = this.signInFormGroup.value;
+    this.signService.signIn(email, password)
       .subscribe(
         (res) => {
-          if(res.result) {
+          if(res.statusCode === 200) {
             localStorage.setItem('token', res.token);
-            this.router.navigate(['/diary']);
+            this.router.navigate(['/home/diary']);
           }
         },
         (error) => {
