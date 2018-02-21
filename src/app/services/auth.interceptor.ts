@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {AuthService} from "./auth.service";
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -15,6 +16,22 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     });
 
-    return next.handle(requestClone);
+    return next.handle(requestClone)
+      .do((event: HttpEvent<any>) => {
+        if(event instanceof HttpResponse){
+          let token: string;
+          const auth = event.headers.getAll("Authorization");
+          if(auth != null){
+            if(auth.length > 1)
+              token = auth[1];
+            else if(auth.length === 1)
+              token = auth[0];
+            else
+              token = null;
+
+            localStorage.setItem('token', token);
+          }
+        }
+      });
   }
 }

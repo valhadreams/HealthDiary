@@ -40,7 +40,6 @@ export class SignInComponent implements OnInit {
       .subscribe(
         (res) => {
           if(res.statusCode === 200) {
-            localStorage.setItem('token', res.token);
             this.router.navigate(['/home/diary']);
           }
         },
