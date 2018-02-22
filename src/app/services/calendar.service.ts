@@ -17,6 +17,13 @@ export class CalendarService {
 
   constructor(private http : HttpClient) { }
 
+  setDateFormatForServer(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    return `${year}-${month}-${day}`;
+  }
+
   getDayOfWeeks(){
     return this.dayOfWeeks;
   }
@@ -24,10 +31,9 @@ export class CalendarService {
   getEventList(): Observable<any>{
     return this.http.get('/api/auth/events')
       .map((res) => {
-        const result = res['result'];
+        const result = res['data'];
         return Object.values(result);
-      })
-      .map(array => array.map(r => new Day(new Date(r.date), r.event, r.bodyInfo)));
+      });
   }
 
   // getEventOfDay(year : number, month: number, date: number){
@@ -36,11 +42,9 @@ export class CalendarService {
   //
   addEventOfDay(date : Date, events : any[], bodyInfo: any) : Observable<any>{
     const data = {
-      "data" : {
-        "date" : date,
-        'bodyInfo' : bodyInfo,
-        "event" : events
-      }
+      "date" : this.setDateFormatForServer(date),
+      'bodyInfo' : bodyInfo,
+      "event" : events
     };
     // const data = new HttpParams()
     //   .set('date', date.toString())
@@ -51,11 +55,9 @@ export class CalendarService {
 
   updateEventOfDay(date : Date, events : any[], bodyInfo: any) : Observable<any>{
     const data = {
-      "data" : {
-        "date" : date,
-        'bodyInfo' : bodyInfo,
-        "event" : events
-      }
+      "date" : this.setDateFormatForServer(date),
+      'bodyInfo' : bodyInfo,
+      "event" : events
     };
     return this.http.put('/api/auth/events', data);
   }

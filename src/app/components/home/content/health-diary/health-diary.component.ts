@@ -34,16 +34,27 @@ export class HealthDiaryComponent implements OnInit{
 
   refreshData(date: Date){
     this.calendarService.getEventList().subscribe(
-      (events) => {
+      (array) => {
         // this.eventList.push(events);
+        let events = [];
+        array.forEach(r => {
+          const index = events.findIndex(e => {
+            return e.date.toString() === new Date(r.date).toString();
+          });
+          if (index < 0) {
+            events.push(new Day(new Date(r.date), [{what: r.what, time: r.time}], r.bodyInfo));
+          } else {
+            events[index].events.push({what: r.what, time: r.time});
+          }
+        });
         this.eventList = events;
-        let thisDate = date;
+        const thisDate = date;
         this.setCalendarData(thisDate.getFullYear(), thisDate.getMonth(), thisDate.getDate());
       },
       (err) => {
         console.log(err);
         this.eventList = [];
-        let thisDate = date;
+        const thisDate = date;
         this.setCalendarData(thisDate.getFullYear(), thisDate.getMonth(), thisDate.getDate());
       },
       () => {

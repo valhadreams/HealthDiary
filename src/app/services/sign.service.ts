@@ -32,7 +32,7 @@ export class SignService {
     //   .set('gender', signInfo.gender)
     //   .set('height', signInfo.height.toString())
     //   .set('weight', signInfo.weight.toString());
-    return this.httpClient.post('/api/auth/user', signUpInfo);
+    return this.httpClient.post('/api/user', signUpInfo);
   }
 
   signIn(email: string, password: string): Observable<any>{
@@ -43,7 +43,7 @@ export class SignService {
     // const signInInfo = new HttpParams()
     //   .set('email', email)
     //   .set('password', password);
-    return this.httpClient.post('/api/auth/login', signInInfo);
+    return this.httpClient.post('/api/login', signInInfo);
   }
 
   signOut(){
