@@ -15,7 +15,7 @@ export class BodyInfoAnalysisComponent implements OnInit {
   constructor(private calendarService: CalendarService) { }
 
   ngOnInit() {
-    this.calendarService.getEventList()
+    this.calendarService.getEventList(new Date())
       .map((array) => {
         return array.map(r => { return { date: r.date, bodyInfo: r.bodyInfo }});
       })

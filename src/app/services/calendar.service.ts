@@ -28,8 +28,10 @@ export class CalendarService {
     return this.dayOfWeeks;
   }
 
-  getEventList(): Observable<any>{
-    return this.http.get('/api/auth/events')
+  getEventList(date: Date): Observable<any>{
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    return this.http.get(`/api/auth/events/${year}-${month}`)
       .map((res) => {
         const result = res['data'];
         return Object.values(result);

@@ -33,7 +33,7 @@ export class HealthDiaryComponent implements OnInit{
   }
 
   refreshData(date: Date){
-    this.calendarService.getEventList().subscribe(
+    this.calendarService.getEventList(date).subscribe(
       (array) => {
         // this.eventList.push(events);
         let events = [];
@@ -67,7 +67,7 @@ export class HealthDiaryComponent implements OnInit{
     this.refreshData(new Date());
   }
 
-  setCalendarData(year : number, month : number, date : number){
+  setCalendarData(year: number, month: number, date: number){
     this.isSameEvent = false;
 
     this.currentDate = new Date(year, month, date);
@@ -132,11 +132,13 @@ export class HealthDiaryComponent implements OnInit{
   }
 
   clickPrevBtn(){
-    this.setCalendarData(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, this.currentDate.getDate());
+    // this.setCalendarData(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, this.currentDate.getDate());
+    this.refreshData(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, this.currentDate.getDate()));
   }
 
   clickNextBtn(){
-    this.setCalendarData(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, this.currentDate.getDate());
+    // this.setCalendarData(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, this.currentDate.getDate());
+    this.refreshData(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, this.currentDate.getDate()));
   }
 
   clickAddEvent(dayObj : Day){
