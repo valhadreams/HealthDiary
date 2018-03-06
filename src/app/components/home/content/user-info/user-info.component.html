@@ -1,19 +1,19 @@
 <div class="main-content user-info-container">
   <div class="user-info">
     <form #form="ngForm" class="user-info-form" novalidate>
-      <fieldset>
+      <fieldset *ngIf="userData != null">
 
         <div class="col-sm-12">
           <div class="form-group label-floating">
             <label class="control-label">Enter your email</label>
-            <input type="email" class="form-control" name="email" [(ngModel)]="email"/>
+            <input type="email" class="form-control" disabled [(ngModel)]="userData.email" name="email"/>
           </div>
         </div>
 
         <div class="col-sm-12">
           <div class="form-group label-floating">
-            <label class="control-label">Enter your nickname</label>
-            <input type="text" class="form-control" disabled name="nickname" [(ngModel)]="nickname"/>
+            <label class="control-label">Nickname</label>
+            <input type="text" class="form-control" name="nickname" [(ngModel)]="userData.nickname"/>
           </div>
         </div>
 
@@ -28,13 +28,13 @@
           <div class="col-sm-6">
             <div class="form-group label-floating">
               <label class="control-label">Enter your height</label>
-              <input type="text" class="form-control" name="height" [(ngModel)]="height"/>
+              <input type="text" class="form-control" name="height" [(ngModel)]="userData.height"/>
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group label-floating">
               <label class="control-label">Enter your weight</label>
-              <input type="text" class="form-control" name="weight" [(ngModel)]="weight"/>
+              <input type="text" class="form-control" name="weight" [(ngModel)]="userData.weight"/>
             </div>
           </div>
         </div>
@@ -42,22 +42,22 @@
         <div>
           <div class="radio col-sm-6">
             <label>
-              <input type="radio" value="Female" name="gender" [(ngModel)]="gender">
+              <input type="radio" value="G" name="gender" [(ngModel)]="userData.gender">
               Female
             </label>
           </div>
           <div class="radio col-sm-6">
             <label>
-              <input type="radio" value="Male" name="gender" [(ngModel)]="gender">
+              <input type="radio" value="B" name="gender" [(ngModel)]="userData.gender">
               Male
             </label>
           </div>
         </div>
       </fieldset>
-      <button class="btn-modify" (click)="submit(form.value)" mat-raised-button color="primary">Modify user info</button>
+      <button class="btn-modify btn btn-primary" (click)="submit(form.value)">Modify user info</button>
     </form>
     <div class="user-delete">
-      <button class="btn-delete" (click)="deleteUser()" mat-raised-button color="primary">Delete your account</button>
+      <button class="btn-delete btn btn-primary" (click)="deleteUser()">Delete your account</button>
     </div>
   </div>
 </div>

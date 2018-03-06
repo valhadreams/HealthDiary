@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {SignService, SignUpObj} from "../../../../services/sign.service";
+import {SignService} from "../../../../services/sign.service";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/observable/empty';
 
 @Component({
   selector: 'app-user-info',
@@ -9,42 +11,55 @@ import {SignService, SignUpObj} from "../../../../services/sign.service";
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent implements OnInit {
-  formModel: FormGroup;
-  nickname: string;
-  email: string;
-  gender: string;
-  height: number;
-  weight: number;
+  // userData: Observable<any>;
+  userData = null;
 
   constructor(private signService : SignService) {
-    this.formModel = new FormGroup({
-      email : new FormControl('', Validators.email),
-      nickname : new FormControl('', Validators.required),
-      password : new FormControl('', Validators.required),
-      gender : new FormControl(),
-      height : new FormControl('', Validators.required),
-      weight : new FormControl('', Validators.required)
-    });
+  }
 
+  ngOnInit() {
     this.signService.getUserInfo()
+      // .map((res) => {
+      //   if (res) {
+      //     const data = {
+      //       nickname : res.nickname,
+      //       email : res.email,
+      //       gender : res.gender,
+      //       height : res.height,
+      //       weight : res.weight
+      //     };
+      //     return data;
+      //   } else {
+      //     throw new Error('Error');
+      //   }
+      // })
+      // .catch(err => {
+      //   console.log(err);
+      //   return Observable.empty();
+      // })
+      // .share();
       .subscribe(
         (res) => {
           console.log(res);
-          if(res){
-            this.nickname = res.nickname;
-            this.email = res.email;
-            this.gender = res.gender;
-            this.height = res.height;
-            this.weight = res.weight;
+          if (res) {
+            this.userData = {
+              nickname: res.nickname,
+              email: res.email,
+              gender: res.gender,
+              height: res.height,
+              weight: res.weight
+            };
           }
         },
         (err) => {
           console.log(err);
-          this.nickname = 'nickname';
-          this.email = 'email';
-          this.gender = 'Female';
-          this.height = 222;
-          this.weight = 222;
+          this.userData = {
+            nickname : 'error',
+            email : 'error@gmail.com',
+            gender : 'G',
+            height : 111,
+            weight : 111
+          };
         },
         () => {
 
@@ -52,11 +67,8 @@ export class UserInfoComponent implements OnInit {
       )
   }
 
-  ngOnInit() {
-  }
-
   submit(formValue : any){
-    const userInfo = this.formModel.value;
+    const userInfo = formValue;
 
     this.signService.updateUserInfo(userInfo)
       .subscribe(
