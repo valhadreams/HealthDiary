@@ -181,9 +181,7 @@ export class HealthDiaryComponent implements OnInit{
     delete value.weight;
 
     const events = Object.values(value);
-    if(events.length === 0){
-      console.log('Empty event');
-    } else if(JSON.stringify(events) === JSON.stringify(this.eventsInServer)){
+    if(JSON.stringify(events) === JSON.stringify(this.eventsInServer)){
       this.isInvalidForm = true;
       this.errorMessage = 'Same with previous events';
     } else {
